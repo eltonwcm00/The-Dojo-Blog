@@ -1,6 +1,10 @@
 import { useState } from 'react';
+import BlogList from './BlogList';
 
 const Home = () => {
+
+    /* Method 1: C/P this JSON into BlogList.js
+       Method 2: Use Props (pass data from parents to its child) */
 
     const [blogs, setBlogs] = useState([
         { title: 'My new website', body: 'lorem ipsum...', author: 'mario', id: 1 },
@@ -8,15 +12,10 @@ const Home = () => {
         { title: 'Web dev top tips', body: 'lorem ipsum...', author: 'mario', id: 3 }
     ]);
 
-
     return(
         <div className="home">
-           {blogs.map((blog) => (
-               <div className="blog-preview" key={blog.id}>
-                   <h2>{blog.title}</h2>
-                   <p>Written by {blog.author}</p>
-               </div>
-           ))}
+          {/*Pass data to its child component through Props*/}
+          <BlogList blogs_passing={blogs} title_passing="All Blogs" />
         </div>
     );
 }
