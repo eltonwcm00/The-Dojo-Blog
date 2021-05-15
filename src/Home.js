@@ -12,15 +12,16 @@ const Home = () => {
         { title: 'Web dev top tips', body: 'lorem ipsum...', author: 'mario', id: 3 }
     ]);
 
+    /* Pass function as Props */ 
+    const handleDelete = (id) => {
+        const newBlogs = blogs.filter(blog => blog.id !== id);
+        setBlogs(newBlogs);
+    }
+
     return(
         <div className="home">
           {/*Pass data to its child component through Props*/}
-          <BlogList blogs_passing={blogs} title_passing="All Blogs" />
-          <BlogList blogs_passing=
-            {
-                blogs.filter((blog) => blog.author === 'mario')
-            }
-            title_passing="Mario's Blogs" />
+          <BlogList blogs_passing={blogs} title_passing="All Blogs" delete_passing={handleDelete}/>
         </div>
     );
 }

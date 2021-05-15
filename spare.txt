@@ -1,0 +1,26 @@
+Home.js
+
+<BlogList blogs_passing=
+            {
+                blogs.filter((blog) => blog.author === 'mario')
+            }
+            title_passing="Mario's Blogs" />
+
+
+Home.js
+
+ {/* The hook takes 2 parameters = var, method name*/}
+    const [name, setName] = useState('mario');
+    const [age, setAge] = useState(25);
+
+    const handleClick = () => {
+        setName('luigi');
+        setAge(30);
+    }
+
+    return(
+        <div className="home">
+            <h2>Homepage</h2>
+            <p>{name} is {age} years old</p>
+        </div>
+    );
