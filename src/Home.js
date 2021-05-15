@@ -1,17 +1,24 @@
+import { useState } from 'react';
+
 const Home = () => {
     
-    const handleClickAgain = (name) => {
-        console.log('hello ' + name);
+    {/* The hook takes 2 parameters = var, method name*/}
+    const [name, setName] = useState('mario');
+    const [age, setAge] = useState(25);
+
+    const handleClick = () => {
+        setName('luigi');
+        setAge(30);
     }
     
     return(
         <div className="home">
             <h2>Homepage</h2>
-            
-            {/* Never invoke function automatically, plain instead of ().
-                Use anonymous function to pass function with parameter  #7*/}
+            <p>{name} is {age} years old</p>
 
-            <button onClick={() => handleClickAgain('mario')}>Click Me</button>
+            {/* Note : Never invoke function automatically, plain instead of ().
+                Use anonymous function to pass function with parameter  #7*/}
+            <button onClick={handleClick}>Click Me</button>
         </div>
     );
 }
