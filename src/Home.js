@@ -1,36 +1,10 @@
-import { useState, useEffect } from 'react';
 import BlogList from './BlogList';
+import useFetch from './useFetch';
 
 const Home = () => {
 
-    /* Use Props (pass data from parents to its child) */
-    const [blogs, setBlogs] = useState(null);
-    const [isPending, setIsPending] = useState(true);
-    const [error, setError] = useState(null);
-
-    /* useEffect will run everytime re-render of the component */
-    /* useEffect dependencies [] is to ensure this function() will be re-render only when a condition is met */
-    /* Fetch JSON data from the endpoint and update the state*/
-    useEffect(() => {
-       setTimeout(() => {
-            fetch('http://localhost:8000/blogs')
-                .then(res => {
-                    if(!res.ok) {
-                        throw Error('Could not fetch the data for the result');
-                    }
-                    return res.json()
-                })
-                .then(data => {
-                    setBlogs(data);
-                    setIsPending(false);
-                    setError(null);
-                })
-                .catch(err => {
-                    setIsPending(false);
-                    setError(err.message);
-                })
-       }, 1000);
-    }, []);
+    /* Import the object return back by the custom hook */
+    const {data: blogs, isPending, error} = useFetch('http://localhost:8000/blogs')
 
     return(
         <div className="home">
