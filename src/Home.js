@@ -1,27 +1,34 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import BlogList from './BlogList';
 
 const Home = () => {
 
-    /* Method 1: C/P this JSON into BlogList.js
-       Method 2: Use Props (pass data from parents to its child) */
+    /* Use Props (pass data from parents to its child) */
+    const [blogs, setBlogs] = useState(null);
+    const [isPending, setIsPending] = useState(true);
 
-    const [blogs, setBlogs] = useState([
-        { title: 'My new website', body: 'lorem ipsum...', author: 'mario', id: 1 },
-        { title: 'Welcome party!', body: 'lorem ipsum...', author: 'yoshi', id: 2 },
-        { title: 'Web dev top tips', body: 'lorem ipsum...', author: 'mario', id: 3 }
-    ]);
+    /* useEffect will run everytime re-render of the component */
+    /* useEffect dependencies [] is to ensure this function() will be re-render only when a condition is met */
+    /* Fetch JSON data from the endpoint and  update the state*/
+    useEffect(() => {
+       setTimeout(() => {
+            fetch('http://localhost:8000/blogs')
+            .then(res => {
+                return res.json()
+            })
+            .then(data => {
+                setBlogs(data);
+                setIsPending(false);
+            });
+       }, 1000);
+    }, []);
 
-    /* Pass function as Props */ 
-    const handleDelete = (id) => {
-        const newBlogs = blogs.filter(blog => blog.id !== id);
-        setBlogs(newBlogs);
-    }
 
     return(
         <div className="home">
-          {/*Pass data to its child component through Props*/}
-          <BlogList blogs_passing={blogs} title_passing="All Blogs" delete_passing={handleDelete}/>
+          {/* Conditional templating (&&), blogs do existing, render only when it got the data */}
+          {isPending && <div>Loading...</div>}
+          {blogs && <BlogList blogs_passing={blogs} title_passing="All Blogs"/>}
         </div>
     );
 }

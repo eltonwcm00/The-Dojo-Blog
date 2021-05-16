@@ -24,3 +24,19 @@ Home.js
             <p>{name} is {age} years old</p>
         </div>
     );
+
+
+Home.js
+
+  /* Pass function as Props */ 
+    const handleDelete = (id) => {
+        const newBlogs = blogs.filter(blog => blog.id !== id);
+        setBlogs(newBlogs);
+    }
+
+      {blogs && <BlogList blogs_passing={blogs} title_passing="All Blogs" delete_passing={handleDelete}/>}
+
+    BlogList.js
+
+           const handleDelete = props.delete_passing;
+           <button onClick={() => handleDelete(blog.id)}>Delete blog</button>
