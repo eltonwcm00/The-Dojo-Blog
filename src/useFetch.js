@@ -16,8 +16,12 @@ const useFetch = (url) => {
     /* Fetch JSON data from the endpoint and update the state*/
     
     useEffect(() => {
+
+        /* Abort fetch when quickly jump around between component*/
+        const abortContoller = new AbortController();
+
         setTimeout(() => {
-            fetch(url)
+            fetch(url, {signal: abortContoller.signal})
                 .then(res => {
                     if(!res.ok) {
                         throw Error('Could not fetch the data for the result');
@@ -30,10 +34,18 @@ const useFetch = (url) => {
                     setError(null);
                 })
                 .catch(err => {
-                    setIsPending(false);
-                    setError(err.message);
+
+                    if(err.name == 'AbortError') {
+                        console.log('Fetch is aborted');
+                    } else {
+                        setIsPending(false);
+                        setError(err.message);
+                    }  
                 })
         }, 1000);
+
+        return() => abortContoller.abort();
+
     }, [url]);
 
     /* Return value of custom hook to be used in the other component */ 
