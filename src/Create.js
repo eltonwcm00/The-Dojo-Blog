@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const Create = () => {
     
@@ -6,6 +7,7 @@ const Create = () => {
     const[body, setBody] = useState('');
     const[author, setAuthor] = useState('mario');
     const[isPending, setIsPending] = useState(false);
+    const redirectUser = useHistory();
   
     const handleSubmit = (e) => {
 
@@ -22,6 +24,9 @@ const Create = () => {
             }).then(() => {
                 console.log('New blog is added');
                 setIsPending(false);
+                /* redirectUser.go(-1); -1 = back to the prev page, 1 = foward to a page 
+                   push to the specific route */
+                redirectUser.push('/');
             })
     }
 
