@@ -7,6 +7,8 @@ const BlogDetails = () => {
     /* useParams hook : Grab route parameters from the route 
        destructure the id (/:id) */
     const { id } = useParams();
+
+    // data: declare a reference local variable
     const { data: blog, error, isPending } = useFetch('http://localhost:8000/blogs/' + id)
     const redirectUser = useHistory();
     

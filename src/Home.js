@@ -9,6 +9,8 @@ const Home = () => {
     return(
         <div className="home">
           {/* Conditional templating (&&), blogs do existing, render only when it got the data */}
+          {/* {variable_name} is important, and it is needed to pass to it's children */}
+
           {error && <div>{error}</div>}
           {isPending && <div>Loading...</div>}
           {data && <BlogList data={data} title="All Blogs"/>}
