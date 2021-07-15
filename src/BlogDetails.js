@@ -6,8 +6,8 @@ const BlogDetails = () => {
 
     /* useParams hook : Grab route parameters from the route 
        destructure the id (/:id) */
-    const {id} = useParams();
-    const {data: blog, error, isPending} = useFetch('http://localhost:8000/blogs/' + id)
+    const { id } = useParams();
+    const { data: blog, error, isPending } = useFetch('http://localhost:8000/blogs/' + id)
     const redirectUser = useHistory();
     
     const handleDelete = () => {

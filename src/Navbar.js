@@ -5,7 +5,7 @@ const Navbar = () => {
         <nav className="navbar">
             <Link to ="/"><h1>The Dojo Blog</h1></Link>
             <div className="links">
-                {/* Link = Handle te routing only in the browser
+                {/* Link = Handle the routing only in the browser
                            , interceept those pages */}
                 <Link to="/">Home</Link>
                 <Link to="/create" style={
